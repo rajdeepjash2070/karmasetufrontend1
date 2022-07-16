@@ -9,7 +9,7 @@ const Editjob = ({ match }) => {
     image: "",
   });
   useEffect(() => {
-    fetch(`http://localhost:8000/admin/${match.params.id}`)
+    fetch(`https://kajersondhanbackend2.herokuapp.com/admin/${match.params.id}`)
       .then((res) => res.json())
       .then((data) => setData(data));
   }, []);
@@ -25,7 +25,7 @@ const Editjob = ({ match }) => {
       formData.append("image", data.image);
       formData.append("name", data.name);
 
-      const res = await fetch(`http://localhost:8000/admin/${match.params.id}`, {
+      const res = await fetch(`https://kajersondhanbackend2.herokuapp.com/admin/${match.params.id}`, {
         method: "PUT",
         body: formData,
       });

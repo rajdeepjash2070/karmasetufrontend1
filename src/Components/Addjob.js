@@ -26,7 +26,7 @@ compensation: "",
       formData.append("basis", data.basis);
       formData.append("timedu", data.timedu);
       formData.append("compensation", data.compensation);
-      const res = await fetch(`http://localhost:8000/admin`, {
+      const res = await fetch(`https://kajersondhanbackend2.herokuapp.com/admin`, {
         method: "POST",
         body: formData,
       });

@@ -29,7 +29,7 @@ image: "",
       formData.append("address", data.address);
 
       formData.append("password", data.password);
-      const res = await fetch(`http://localhost:8000/adminregister`, {
+      const res = await fetch(`https://kajersondhanbackend2.herokuapp.com/adminregister`, {
         method: "POST",
         body: formData,
       });
