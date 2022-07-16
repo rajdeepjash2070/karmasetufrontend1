@@ -1,0 +1,22 @@
+.navbar{
+    background: linear-gradient(45deg, rgb(162, 0, 255),rgb(70, 0, 136));
+    font-weight: bold;
+}
+
+.navbar a{
+    color: white;
+    
+}
+.container-fluid{
+    margin-left: 200px;
+}
+
+.navbar .dropdown-menu{
+    color: black;
+}
+
+@media only screen and (max-width: 1080px){
+    .container-fluid{
+        margin-left: 0px;
+    }
+}

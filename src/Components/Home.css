@@ -1,0 +1,46 @@
+
+@media only screen and (max-width: 1000px) {
+    
+  .header img{
+height: 350px;
+  }
+ 
+ 
+  }
+
+.header{
+    width: 85%;
+}
+.header-text{
+    text-align: center;
+}
+.header-text #div1{
+    margin-top: 100px;
+    text-align: center;
+    font-weight: bolder;
+color: rgb(83, 0, 161);
+font-size: 40px;
+}
+.header-text #div2{
+    font-weight: bolder;
+    color: rgb(83, 0, 161);
+    text-align: center;
+    font-size: 30px;
+}
+.header-text button{
+    background-color: rgb(91, 0, 177);
+    font-size: 25px;
+}
+.header-text button:hover{
+    background-color: rgb(91, 0, 177);
+}
+.search-bar .card{
+background-color: white;
+border: none;
+
+
+}
+.search-bar input[type="search"]{
+    height: 50px;
+   border: 2px solid blueviolet;
+}
