@@ -1,16 +1,20 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+import useGeoLocation from "./LocationGeo";
 const Addjob = () => {
   const history = useNavigate();
+  const location = useGeoLocation();
   const [data, setData] = useState({
     name: "",
+    address:"",
     image: "",
     description: "",
     phnumber: "",
 basis: "",
 timedu: "",
 compensation: "",
+longi:"",
+lati:"",
   });
   const handleChange = (name) => (e) => {
     const value = name === "image" ? e.target.files[0] : e.target.value;
@@ -21,17 +25,20 @@ compensation: "",
       let formData = new FormData();
       formData.append("image", data.image);
       formData.append("name", data.name);
+      formData.append("address", data.address);
       formData.append("description", data.description);
       formData.append("phnumber", data.phnumber);
       formData.append("basis", data.basis);
       formData.append("timedu", data.timedu);
+      formData.append("longi", location.coordinates.lng);
+      formData.append("lati", location.coordinates.lat);
       formData.append("compensation", data.compensation);
-      const res = await fetch(`https://kajersondhanbackend2.herokuapp.com/admin`, {
+      const res = await fetch(`http://localhost:8000/admin`, {
         method: "POST",
         body: formData,
       });
       if (res.ok) {
-        setData({ name: "", image: "" ,description:"",phnumber:"",basis:"",timedu:"",compensation:""});
+        setData({ name: "", image: "" ,address:"", description:"",phnumber:"",basis:"",timedu:"",compensation:"",longi:"",lati:""});
         history.replace("/");
       }
     } catch (error) {
@@ -52,6 +59,16 @@ compensation: "",
           onChange={handleChange("name")}
         />
         
+      </div>
+      <div className="mb-2">
+      <input
+      className="form-control"
+      placeholder="Work Address"
+      type="text"
+      name="address"
+      value={data.address}
+      onChange={handleChange("address")}
+    />
       </div>
       <div className="mb-2">
       <input
@@ -118,6 +135,10 @@ compensation: "",
         </button>
       </div>
       </div>
+      <h1 className="text-center">You are Providing your Location</h1>
+      {location.loaded
+        ? JSON.stringify(location.coordinates)
+        : "Location data not available yet."}
     </div>
   );
 };

@@ -1,12 +1,14 @@
 import React from 'react'
 import { useEffect, useState } from "react";
 import Navbar from './Navbar';
+import "./Home.css"
+import Footer from './Footer';
 const Perweekfrontend = () => {
   const [users, setUsers] = useState();
-
+  const [searchtext,setSearchtext]=useState('')
   useEffect(() => {
     const fetchUsers = async () => {
-      const res = await fetch('https://kajersondhanbackend2.herokuapp.com/admin');
+      const res = await fetch('http://localhost:8000/admin');
       const data = await res.json();
       setUsers(data);
      
@@ -15,7 +17,14 @@ const Perweekfrontend = () => {
   }, []);
   return (
     <div>
+
     <Navbar/>
+    <div className='search-container'>
+    <input type="text" name="search" placeholder="Search by Salary or Location" className="search-input" onChange={event=>{setSearchtext(event.target.value)}}/>
+  
+           <i class="fas fa-search"></i>      
+  
+</div>
     <h1 className='text-center m-2'>সপ্তাহের উপর ভিত্তি করে</h1>
     <div className='m-2'>
 <div className="row">
@@ -40,12 +49,13 @@ const Perweekfrontend = () => {
         <hr/>
         <div class="card-body">
           
-        <h4 className="card-title">{user.name}</h4>
-        <p class="card-text">{user.description}</p>
-        <p class="card-text">{user.phnumber}</p>
-          <p class="card-text">{user.basis}</p>
-          <p class="card-text">{user.timedu}</p>
-          <p class="card-text">{user.compensation}</p>
+        <h4 className="card-title" style={{color:"red"}}>Organisation Name: {user.name}</h4>
+      
+        <p class="card-text" style={{color:"blue"}}><i class="fa-solid fa-phone"></i> Call Now: {user.phnumber}</p>
+        <p class="card-text" style={{color:"green"}}><i class="fa-solid fa-location-dot"></i> Location: {user.address}</p>
+          <p class="card-text" style={{color:"green"}}><i class="fa-solid fa-calendar-days"></i> Duration: {user.timedu}</p>
+          <p class="card-text" style={{color:"green"}}><i class="fa-solid fa-indian-rupee-sign"></i> Salary: {user.compensation} {user.basis}</p>
+           <a href={`/apply/${user._id}`} style={{marginLeft:"100px"}}><button className='btn btn-primary'>Apply</button></a>
          
         </div>
       </div>
@@ -57,7 +67,7 @@ const Perweekfrontend = () => {
         
       </div>
       </div>
-  
+<Footer/>
     </div>
   )
 }

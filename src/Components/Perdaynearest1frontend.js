@@ -3,9 +3,26 @@ import Navbar from './Navbar'
 import "./Home.css"
 import { useEffect, useState } from "react";
 import Footer from './Footer';
-const Permonthfrontend = () => {
+import useGeoLocation from "./LocationGeo";
+import haversine from 'haversine-distance'
+const Perdayfrontend = () => {
     const [users, setUsers] = useState();
     const [searchtext,setSearchtext]=useState('')
+    const location = useGeoLocation();
+    const getdistance=(a1,a2)=>{
+        const b1=parseFloat(a1);
+        const b2=parseFloat(a2);
+      console.log(b1,b2)
+        const d1=parseFloat(`${location.coordinates.lat}`)
+        const d2=parseFloat(`${location.coordinates.lng}`)
+        console.log(d1,d2)
+        const a = [b1, b2]
+        const d=[d1,d2]
+      console.log("Distance is")
+       const dist=haversine(a,d)
+       return (dist/1000)
+      
+      }
     useEffect(() => {
       const fetchUsers = async () => {
         const res = await fetch('http://localhost:8000/admin');
@@ -19,20 +36,29 @@ const Permonthfrontend = () => {
   return (
     <div>
     <Navbar/>
-    <div className='search-container'>
-    <input type="text" name="search" placeholder="Search by Salary or Location" className="search-input" onChange={event=>{setSearchtext(event.target.value)}}/>
-  
-           <i class="fas fa-search"></i>      
-  
-</div>
-    <h1 className='text-center m-2'>মাসের  উপর ভিত্তি করে</h1>
+   
+        <div className='search-container'>
+         <input type="text" name="search" placeholder="Search by Salary or Location" className="search-input" onChange={event=>{setSearchtext(event.target.value)}}/>
+       
+                <i class="fas fa-search"></i>      
+       
+    </div>
+    
+   <h1 className='text-center'>Your Nearest Jobs</h1>
+    <h1 className='text-center m-2'>দিনের উপর ভিত্তি করে</h1>
     <div className='m-2'>
 <div className="row">
 
       {
         users && users.filter((user)=>{
-          if(user.basis=="Per Month"){
+          if(user.basis=="Per Day" && getdistance(user.lati,user.longi)<=30){
             return users
+          }
+          else if(user.address==(searchtext) || user.salary==(searchtext) && user.basis=="Per Day"){
+            // console.log(hospital.district.toLowerCase().includes(searchtext.toLocaleLowerCase()))
+    
+              return users
+          
           }
           
           // else if(hospital.state.toLowerCase().includes(searchstate.toLocaleLowerCase()) ){
@@ -67,9 +93,10 @@ const Permonthfrontend = () => {
         
       </div>
       </div>
+    
     <Footer/>
     </div>
   )
 }
 
-export default Permonthfrontend
+export default Perdayfrontend

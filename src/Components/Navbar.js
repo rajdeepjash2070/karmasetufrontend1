@@ -16,11 +16,9 @@ const Navbar = () => {
               <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="/home" style={{color:"white"}}>হোম পেজ</a>
               </li>
+           
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="/recruitorhire" style={{color:"white"}}>কাজের জন্য নিয়োগ করুন</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#" style={{color:"white"}}>আমাদের সম্পর্কে জানুন</a>
+                <a class="nav-link" href="/about" style={{color:"white"}}>আমাদের সম্পর্কে জানুন</a>
               </li>
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button" style={{color:"white"}} data-bs-toggle="dropdown" aria-expanded="false">

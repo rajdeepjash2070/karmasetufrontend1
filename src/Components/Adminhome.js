@@ -6,7 +6,7 @@ const Adminhome = () => {
 
   useEffect(() => {
     const fetchUsers = async () => {
-      const res = await fetch('https://kajersondhanbackend2.herokuapp.com/admin');
+      const res = await fetch('http://localhost:8000/admin');
       const data = await res.json();
       setUsers(data);
       console.log(users);
@@ -16,7 +16,7 @@ const Adminhome = () => {
 
   const handleDelete = async (id) => {
     try {
-      const res = await fetch(`https://kajersondhanbackend2.herokuapp.com/admin/${id}`, {
+      const res = await fetch(`http://localhost:8000/admin/${id}`, {
         method: "DELETE",
       });
       if (res.ok) {
@@ -29,8 +29,10 @@ const Adminhome = () => {
   };
   return (
     <div>
+    <div className="post-section" style={{marginLeft:"600px"}}>
     <h5>Post a Job Here</h5>
     <a href="/adminaddjob"><button className="btn btn-primary">Post Here <i class="fa-solid fa-circle-plus"></i></button></a>
+    </div>
     <div className="row">
       {users?.map((user) => (
         <div className="col-md-3" key={user._id}>

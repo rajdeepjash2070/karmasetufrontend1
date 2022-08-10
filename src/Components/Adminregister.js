@@ -13,6 +13,8 @@ address: "",
 image: "",
 
   });
+  const [error, setError] = useState("");
+	const [msg, setMsg] = useState("");
 
   const handleChange = (name) => (e) => {
     const value = name === "image" ? e.target.files[0] : e.target.value;
@@ -29,16 +31,23 @@ image: "",
       formData.append("address", data.address);
 
       formData.append("password", data.password);
-      const res = await fetch(`https://kajersondhanbackend2.herokuapp.com/adminregister`, {
+      const res = await fetch(`http://localhost:8000/adminregister`, {
         method: "POST",
         body: formData,
       });
       if (res.ok) {
         setData({ name: "", image: "" ,email:"",contactnumber:"",address:""});
-        history("/adminhome");
+      
       }
     } catch (error) {
       console.log(error);
+      if (
+				error.response &&
+				error.response.status >= 400 &&
+				error.response.status <= 500
+			) {
+				setError(error.response.data.message);
+			}
     }
   };
   return (
