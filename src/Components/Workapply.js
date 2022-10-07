@@ -79,7 +79,7 @@ const Workapply = () => {
    <h4 className='text-center'>Description: {inpval.description}</h4>
    <h4 className='text-center'>Time Duration: {inpval.timedu}</h4>
    <h4 className='text-center'>Type of Salary: {inpval.basis}</h4>
-   <h4 className='text-center'>Compensation: {inpval.phnumber}</h4>
+   <h4 className='text-center'>Contact Number: {inpval.phnumber}</h4>
    <h2 className='text-center' style={{fontWeight:"bolder"}}>Salary: {inpval.compensation} {inpval.basis}</h2>
 
     </form>

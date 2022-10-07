@@ -22,6 +22,7 @@ import About from "./Components/About";
 import Admineditjob from "./Components/Admineditjob";
 import Getlocation from "./Components/Getlocation";
 import Register from "./Components/Register";
+import Adminlogin from "./Components/Adminlogin";
 function App(){
 
   return (
@@ -40,6 +41,7 @@ function App(){
     <Route path="/permonthjob" element={<Permonthfrontend/>}/>
     <Route path="/perweekjob" element={<Perweekfrontend/>}/>
     <Route path="/adminregister" element={<Adminregister/>}/>
+    <Route path="/adminlogin" element={<Adminlogin/>}/>
     <Route path="/getlocation" element={<Getlocation/>}/>
     <Route path="/register" element={<Workerregister/>}/>
     <Route path="/apply/:id" element={<Workapply/>}/>

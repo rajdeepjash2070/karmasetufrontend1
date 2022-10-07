@@ -42,13 +42,11 @@ console.log("Distance is")
     fetchUsers();
   }, []);
 
-
+  location.loaded?JSON.stringify(location.coordinates):console.log("Location data not available yet")
   return (
     <div id='home'>
     <Navbar/>
-   { location.loaded
-    ? JSON.stringify(location.coordinates)
-    : "Location data not available yet."}
+  
     <div className='d-flex justify-content-center'>
     <div class="row header">
 <div class="col-md-6">

@@ -45,7 +45,9 @@ lati:"",
       console.log(error);
     }
   };
-
+  location.loaded
+  ? JSON.stringify(location.coordinates)
+  : console.log("Location data not available yet.")
   return (
     <div style={{ maxWidth: 500, margin: "auto" }}>
     <div className="mt-4">
@@ -135,10 +137,8 @@ lati:"",
         </button>
       </div>
       </div>
-      <h1 className="text-center">You are Providing your Location</h1>
-      {location.loaded
-        ? JSON.stringify(location.coordinates)
-        : "Location data not available yet."}
+     
+      
     </div>
   );
 };

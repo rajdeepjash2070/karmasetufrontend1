@@ -1,73 +1,41 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-
+import "./Adminlogin.css"
 
 const Adminlogin = () => {
+	const [admin,setAdmin]=useState();
 	const [data, setData] = useState({ email: "", password: "" });
-	const [error, setError] = useState("");
+	
+	useEffect(() => {
+		const fetchUsers = async () => {
+		  const res = await fetch('http://localhost:8000/adminregister');
+		  const data = await res.json();
+		  console.log(data)
+		  setAdmin(data);
+		 
+		};
+		fetchUsers();
+	  }, []);
+	 
+console.log(admin)
 
 	const handleChange = ({ currentTarget: input }) => {
 		setData({ ...data, [input.name]: input.value });
 	};
 
-	const handleSubmit = async (e) => {
-		e.preventDefault();
-		try {
-			const url = "http://localhost:8080/api/auth";
-			const { data: res } = await axios.post(url, data);
-			localStorage.setItem("token", res.data);
-			window.location = "/";
-		} catch (error) {
-			if (
-				error.response &&
-				error.response.status >= 400 &&
-				error.response.status <= 500
-			) {
-				setError(error.response.data.message);
-			}
-		}
-	};
+	
 
 	return (
 		<div>
-			<div>
-				<div>
-					<form  onSubmit={handleSubmit}>
-						<h1>Login to Your Account</h1>
-						<input
-							type="email"
-							placeholder="Email"
-							name="email"
-							onChange={handleChange}
-							value={data.email}
-							required
-							
-						/>
-						<input
-							type="password"
-							placeholder="Password"
-							name="password"
-							onChange={handleChange}
-							value={data.password}
-							required
-							
-						/>
-						{error && <div>{error}</div>}
-						<button type="submit" >
-							Sing In
-						</button>
-					</form>
-				</div>
-				<div className={styles.right}>
-					<h1>New Here ?</h1>
-					<Link to="/signup">
-						<button type="button">
-							Sing Up
-						</button>
-					</Link>
-				</div>
+			<form>
+			<div className="p-4">
+			<input type="email" name="email" placeholder="Write your email" value={data.email}/>
 			</div>
+			<div className="p-4">
+			<input type="password" name="password" placeholder="write your password" value={data.password}/>
+			</div>
+			</form>
 		</div>
 	);
 };
